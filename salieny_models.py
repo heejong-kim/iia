@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torchvision
 import torch.nn.functional as F
-from torchvision.models import ConvNeXt_Base_Weights
+# from torchvision.models import ConvNeXt_Base_Weights
 
 
 def create_sequential_model_without_top(model, num_top_layers=1):
@@ -64,13 +64,13 @@ class GradModel(nn.Module):
             self.post_features = model.features[feature_layer:-1]
             self.avgpool = torch.nn.AvgPool2d(kernel_size=7, stride=1)
             self.classifier = model.classifier
-        elif model_name == 'convnext':
-            self.model_str = model_name
-            model = torchvision.models.convnext_base(weights=ConvNeXt_Base_Weights.IMAGENET1K_V1)
-            self.features = model.features
-            self.post_features = model.features[feature_layer:-1]
-            self.avgpool = model.avgpool
-            self.classifier = model.classifier
+        # elif model_name == 'convnext':
+        #     self.model_str = model_name
+        #     model = torchvision.models.convnext_base(weights=ConvNeXt_Base_Weights.IMAGENET1K_V1)
+        #     self.features = model.features
+        #     self.post_features = model.features[feature_layer:-1]
+        #     self.avgpool = model.avgpool
+        #     self.classifier = model.classifier
         elif model_name == 'vgg16':
             model = torchvision.models.vgg16(pretrained=True)
             self.features = model.features
